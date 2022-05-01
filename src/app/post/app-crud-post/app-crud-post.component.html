@@ -1,0 +1,35 @@
+<div class="container">
+  <h1>Selected Post</h1>
+  <mat-card>
+    <form class="example-form" [formGroup]="formPost">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <input matInput formControlName="postId">
+        <mat-label>Heading:</mat-label>
+        <input matInput formControlName="heading" placeholder="Ex. Heading...">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Content:</mat-label>
+        <input matInput formControlName="content" placeholder="Ex. Content...">
+      </mat-form-field>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" *ngIf="action === ''" (click)="onCreate()">Create</button>
+        <button mat-raised-button color="primary" *ngIf="action === 'update'" (click)="onUpdate()">Update</button>
+        <button mat-raised-button color="primary" *ngIf="action !== ''" (click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
+<div class="container">
+  <h2> Post</h2>
+  <div *ngIf="posts$">
+    <div class="container" *ngFor="let post of (posts$ | async)">
+      <mat-card>
+        <p>{{post.heading}}</p>
+        <mat-card-actions align="end">
+          <button mat-raised-button color="primary" (click)="onDelete(post)">Delete</button>
+          <button mat-raised-button color="primary" (click)="onSelect(post)">Selec</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
