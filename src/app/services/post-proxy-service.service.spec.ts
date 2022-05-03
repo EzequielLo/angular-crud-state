@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { PostProxyService } from './post-proxy-service.service';
 
-import { PostProxyServiceService } from './post-proxy-service.service';
 
 describe('PostProxyServiceService', () => {
-  let service: PostProxyServiceService;
+  let service: PostProxyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PostProxyServiceService);
+    service = TestBed.inject(PostProxyService);
   });
 
   it('should be created', () => {

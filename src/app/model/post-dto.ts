@@ -1,6 +1,6 @@
 export interface PostDTO {
   id: number;
-  userId?: number;
+  userId: null | number;
   title: string;
   body: string;
 }

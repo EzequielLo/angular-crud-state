@@ -9,8 +9,8 @@ import { PostStoreService } from 'src/app/services/post-store.service';
   templateUrl: './app-crud-post.component.html',
   styleUrls: ['./app-crud-post.component.css']
 })
-export class AppCrudPostComponent implements OnInit {
 
+export class AppCrudPostComponent implements OnInit {
 
   posts$!: Observable<Post[]>;
   formPost!: FormGroup;

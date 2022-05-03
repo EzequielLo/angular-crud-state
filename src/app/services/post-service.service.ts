@@ -63,11 +63,12 @@ export class PostServiceService {
   }
 
   private adaptModelTODTO(post: Post): PostDTO {
+
     return {
       id: post.postId,
       title: post.heading,
       body: post.content,
-      userId: undefined,
+      userId: null
 
     };
   }

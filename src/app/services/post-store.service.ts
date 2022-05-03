@@ -8,6 +8,7 @@ import { PostServiceService } from './post-service.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PostStoreService extends Store<Post[]> {
 
   constructor(private service: PostServiceService) {
@@ -16,21 +17,21 @@ export class PostStoreService extends Store<Post[]> {
 
   async init() {
     if (this.get()) { return }
-    await lastValueFrom(this.service.getPosts().pipe(
+    return await lastValueFrom(this.service.getPosts().pipe(
       tap(this.store)
     ))
 
   }
-  async create(post: Post) {
-    await lastValueFrom(this.service.createPost(post).pipe(
+  async create(post: Post): Promise<Post> {
+    return await lastValueFrom(this.service.createPost(post).pipe(
       tap(postResult => {
         this.store([postResult, ...this.get()]);
       })
     ))
   }
 
-  async update(postId: number, post: Post) {
-    await lastValueFrom(this.service.updatePost(postId, post).pipe(
+  async update(postId: number, post: Post): Promise<Post> {
+    return await lastValueFrom(this.service.updatePost(postId, post).pipe(
       tap(() => {
         const posts = this.get();
         const p = Object.assign({}, post);
@@ -41,8 +42,8 @@ export class PostStoreService extends Store<Post[]> {
     ))
   }
 
-  async delete(postId: number) {
-    await lastValueFrom(this.service.deletePost(postId).pipe(
+  async delete(postId: number): Promise<Post> {
+    return await lastValueFrom(this.service.deletePost(postId).pipe(
       tap(() => {
         const posts = this.get();
         const newPosts = posts.filter(post => post.postId !== postId);
